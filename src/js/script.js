@@ -13,6 +13,9 @@
     className: {
       bookImage: '.book__image',
     },
+    classActive: {
+      favorite: 'favorite',
+    }
   };
   const tempates = {
     books: Handlebars.compile(document.querySelector(select.templateOf.books).innerHTML),
@@ -37,14 +40,22 @@
     console.log(imageBooks);
     for(let imageBook of imageBooks){
       imageBook.addEventListener('click', function(event){
-        
-        imageBook.classList.add('favorite');
         event.preventDefault();
-        
         const getID = imageBook.getAttribute('data-id');
-        console.log(getID);
-
-        favoriteBooks.push(getID);
+        
+        if(!favoriteBooks.includes(getID)){
+          imageBook.classList.add(select.classActive.favorite);
+          favoriteBooks.push(getID);
+        }else{
+          imageBook.classList.remove(select.classActive.favorite);
+          const index = favoriteBooks.indexOf(getID);
+          console.log('index: ', index);
+          favoriteBooks.splice(index, 1);
+        }
+        
+        
+        
+        
 
         console.log('favoriteBooks: ', favoriteBooks);
       });
