@@ -128,30 +128,27 @@
     }
 
     bookFilter() {
-      const dataBooks = dataSource.books;
-      const bookArray = [];
-      
-      for(let dataBook of dataBooks){
-        console.log('dataBook:', dataBook);
+      const dataBooks = dataSource.books;      
+      const bookArray = [];  
+
+      for(let dataBook of dataBooks){     
+           
         let shouldBeHidden = false;
-        
-        for(let filter of filters){
-          if(!dataBook.details[filter]){
+    
+        for(let filter of filters) {
+          if(!dataBook.details[filter]) {
             shouldBeHidden = true;
             bookArray.push(dataBook.id);
             break;
           }
-            
         }
-  
-        
-        if(shouldBeHidden == true){
-          const bookImage = document.querySelector('.book__image[data-id="' + bookArray.id + '"]');
-          // bookImage.classList.add(select.className.hidden);
-          console.log('bookImage: ', bookImage);  
-        } else if (shouldBeHidden == false){
-          //const bookImage = document.querySelector('[data-id="' + bookArray.id + '"]');
-          // bookImage.classList.remove(select.classActive.hidden); 
+     
+        if(shouldBeHidden == true){        
+          const bookImage = document.querySelector('[data-id="' + dataBook.id + '"]');
+          bookImage.classList.add(select.classActive.hidden);        
+        }  else if (shouldBeHidden == false){
+          const bookImage = document.querySelector('[data-id="' + dataBook.id + '"]');
+          bookImage.classList.remove(select.classActive.hidden);
         }
       }
     }
